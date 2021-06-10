@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ddclient-config
+  labels:
+    {{- include "ddclient.labels" . | nindent 4 }}
+type: kubernetes.io/basic-auth
+stringData:
+  {{- with .Values.ddns }}
+  ddclient.conf: >
+    ssl={{ .ssl }}
+    protocol={{ .protocol }}
+    login={{ .login }}
+    password={{ .password }}
+    {{ .domain }}
+    {{ .other }}
+  {{- end }}

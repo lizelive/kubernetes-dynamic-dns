@@ -1,1 +1,1 @@
-# kubernetes-google-domains-ddns
+# A kubernetes ddclient
