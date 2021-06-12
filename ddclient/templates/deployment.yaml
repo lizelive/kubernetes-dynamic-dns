@@ -25,9 +25,9 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: ghcr.io/linuxserver/ddclient
-          - env:
+          env:
             - name: TZ
-              value: { .Values.timezone }
+              value: {{ .Values.timezone }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
@@ -37,7 +37,7 @@ spec:
       volumes:
       - name: ddclient-config
         secret:
-          secretName: ddclient-config
+          secretName: {{ include "ddclient.configName" . }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
